@@ -49,3 +49,10 @@ body {
 .btn-cart:hover {
   background-color: #218838;
 }
+
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: center;
+}
