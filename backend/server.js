@@ -6,6 +6,7 @@ const Product = require("./models/Product");
 const bcrypt = require("bcryptjs");
 const User = require("./models/User");
 const jwt = require("jsonwebtoken");
+const verifyToken = require("./middleware/auth");
 
 const app = express();
 app.use(cors());
@@ -22,7 +23,7 @@ mongoose
 
 // Viết API CRUD cho producds.js
 // CREATE - thêm sản phẩm mới
-app.post("/products", async function (req, res) {
+app.post("/products", verifyToken, async function (req, res) {
   try {
     const newProduct = new Product({
       name: req.body.name,
@@ -57,7 +58,7 @@ app.get("/products/:id", async function (req, res) {
 });
 
 // UPDATE - sửa sản phẩm theo id
-app.put("/products/:id", async function (req, res) {
+app.put("/products/:id", verifyToken, async function (req, res) {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -71,7 +72,7 @@ app.put("/products/:id", async function (req, res) {
 });
 
 // DELETE - xóa sản phẩm theo id
-app.delete("/products/:id", async function (req, res) {
+app.delete("/products/:id", verifyToken, async function (req, res) {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.json({ message: "Đã xóa sản phẩm" });
