@@ -5,6 +5,7 @@ require("dotenv").config();
 const Product = require("./models/Product");
 const bcrypt = require("bcryptjs");
 const User = require("./models/User");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 app.use(cors());
@@ -101,6 +102,38 @@ app.post("/register", async function (req, res) {
 
     await newUser.save();
     res.json({ message: "Đăng ký thành công!" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
+//route /login
+
+app.post("/login", async function (req, res) {
+  try {
+    const { email, password } = req.body;
+
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.status(400).json({ message: "Email không tồn tại" });
+    }
+
+    // So sánh password nhập vào với password đã hash trong DB
+    const isMatch = await bcrypt.compare(password, user.password);
+    if (!isMatch) {
+      return res.status(400).json({ message: "Sai mật khẩu" });
+    }
+
+    // Tạo token chứa id user, hết hạn sau 7 ngày
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
+      expiresIn: "7d",
+    });
+
+    res.json({
+      message: "Đăng nhập thành công!",
+      token: token,
+      user: { name: user.name, email: user.email },
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
