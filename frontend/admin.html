@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quản lý sản phẩm - Admin</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1 class="shop-title">Trang quản trị sản phẩm</h1>
+
+    <div class="cart-box">
+      <h3>Thêm sản phẩm mới</h3>
+      <form id="product-form">
+        <input
+          type="text"
+          id="input-name"
+          placeholder="Tên sản phẩm"
+          required />
+        <input
+          type="number"
+          id="input-price"
+          placeholder="Giá (VNĐ)"
+          required />
+        <input type="text" id="input-image" placeholder="Link ảnh" required />
+        <button type="submit" class="btn-cart">Thêm sản phẩm</button>
+      </form>
+    </div>
+
+    <div class="product-list" id="admin-product-list"></div>
+
+    <script src="admin.js"></script>
+  </body>
+</html>
