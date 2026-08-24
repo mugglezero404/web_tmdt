@@ -45,9 +45,14 @@ form.addEventListener("submit", async function (event) {
     image: document.getElementById("input-image").value,
   };
 
+  const token = localStorage.getItem("token");
+
   await fetch(API_URL, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: "Bearer " + token,
+    },
     body: JSON.stringify(newProduct),
   });
 
@@ -59,8 +64,13 @@ async function deleteProduct(id) {
   const confirmDelete = confirm("Bạn có chắc muốn xóa sản phẩm này?");
   if (!confirmDelete) return;
 
+  const token = localStorage.getItem("token");
+
   await fetch(API_URL + "/" + id, {
     method: "DELETE",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
   });
 
   loadProducts();
