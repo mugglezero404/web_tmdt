@@ -6,6 +6,6 @@ const productSchema = new mongoose.Schema({
   image: { type: String, required: true },
 });
 
-const Product = mongoose.model("Product", productSchema);
+const Product = mongoose.model("Product", productSchema); //tự tạo id:  /products/:id cho từng sản phẩm
 
 module.exports = Product;
