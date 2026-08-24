@@ -249,6 +249,18 @@ app.post("/checkout", verifyToken, async function (req, res) {
   }
 });
 
+//route lấy đơn hàng theo user
+app.get("/orders", verifyToken, async function (req, res) {
+  try {
+    const orders = await Order.find({ userId: req.userId }).sort({
+      createdAt: -1,
+    });
+    res.json(orders);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+});
+
 app.listen(3000, function () {
   console.log("Server đang chạy tại http://localhost:3000");
 });
