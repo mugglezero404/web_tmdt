@@ -24,7 +24,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Thêm sản phẩm (Cần login)
-router.post("/", verifyToken, async (req, res) => {
+router.post("/", verifyToken, isAdmin, async (req, res) => {
   try {
     const newProduct = new Product(req.body);
     const savedProduct = await newProduct.save();
@@ -35,7 +35,7 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 // Sửa sản phẩm (Cần login)
-router.put("/:id", verifyToken, async (req, res) => {
+router.put("/:id", verifyToken, isAdmin, async (req, res) => {
   try {
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
@@ -49,7 +49,7 @@ router.put("/:id", verifyToken, async (req, res) => {
 });
 
 // Xóa sản phẩm (Cần login)
-router.delete("/:id", verifyToken, async (req, res) => {
+router.delete("/:id", verifyToken, isAdmin, async (req, res) => {
   try {
     await Product.findByIdAndDelete(req.params.id);
     res.json({ message: "Đã xóa sản phẩm" });
