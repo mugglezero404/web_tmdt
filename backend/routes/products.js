@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/Product");
 const verifyToken = require("../middleware/auth");
+const isAdmin = require("../middleware/isAdmin");
 
 // Lấy tất cả sản phẩm
 router.get("/", async (req, res) => {
