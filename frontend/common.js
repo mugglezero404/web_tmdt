@@ -1,6 +1,7 @@
 function renderNavbar() {
   const token = localStorage.getItem("token");
   const userName = localStorage.getItem("userName");
+  const userRole = localStorage.getItem("userRole"); // thêm dòng này
 
   // Tạo khung navbar
   const navbar = document.createElement("div");
@@ -9,11 +10,19 @@ function renderNavbar() {
   // Các link điều hướng — luôn hiện, dù đăng nhập hay chưa
   const navLinks = document.createElement("div");
   navLinks.className = "nav-links";
-  navLinks.innerHTML = `
-        <a href="index.html">Trang chủ</a>
-        <a href="orders.html">Đơn hàng của tôi</a>
-        <a href="admin.html">Quản trị</a>
+  let linksHtml = `
+    <a href="index.html">Trang chủ</a>
+    <a href="orders.html">Đơn hàng của tôi</a>
+  `;
+
+  // Nếu là admin thì thêm Quản trị
+  if (userRole === "admin") {
+    linksHtml += `
+      <a href="admin.html">Quản trị</a>
     `;
+  }
+
+  navLinks.innerHTML = linksHtml;
 
   // Khu vực bên phải: tùy trạng thái đăng nhập
   const navUser = document.createElement("div");
@@ -46,6 +55,7 @@ function renderNavbar() {
 function logout() {
   localStorage.removeItem("token");
   localStorage.removeItem("userName");
+  localStorage.removeItem("userRole"); // thêm dòng này
   window.location.href = "login.html";
 }
 

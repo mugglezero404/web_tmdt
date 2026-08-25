@@ -46,6 +46,8 @@ loginForm.addEventListener("submit", async function (event) {
     // Lưu token vào localStorage để dùng cho các lần gọi API sau
     localStorage.setItem("token", data.token);
     localStorage.setItem("userName", data.user.name);
+    localStorage.setItem("userRole", data.user.role); //thêm dòng này
+
     loginMessage.textContent =
       "Đăng nhập thành công! Xin chào " + data.user.name;
   } else {
