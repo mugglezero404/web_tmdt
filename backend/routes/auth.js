@@ -32,14 +32,16 @@ router.post("/login", async function (req, res) {
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Sai mật khẩu" });
 
-    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, {
-      expiresIn: "7d",
-    });
+    const token = jwt.sign(
+      { userId: user._id, role: user.role }, // thêm role vào đây
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" },
+    );
 
     res.json({
       message: "Đăng nhập thành công!",
-      token,
-      user: { name: user.name, email: user.email },
+      token: token,
+      user: { name: user.name, email: user.email, role: user.role }, // trả thêm role
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

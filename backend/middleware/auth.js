@@ -13,6 +13,7 @@ function verifyToken(req, res, next) {
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     req.userId = decoded.userId; // Gắn userId vào req để route sau dùng được
+    req.userRole = decoded.role; // Thêm dòng này
     next(); // Cho phép đi tiếp tới route handler thật sự
   } catch (error) {
     return res.status(401).json({ message: "Token không hợp lệ" });
