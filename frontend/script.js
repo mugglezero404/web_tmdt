@@ -133,7 +133,7 @@ async function checkout() {
     return;
   }
 
-  const response = await fetch(API_URL + "/checkout", {
+  const response = await fetch(API_URL + "/orders/checkout", {
     method: "POST",
     headers: { Authorization: "Bearer " + token },
   });

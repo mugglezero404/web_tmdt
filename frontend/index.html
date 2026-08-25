@@ -7,6 +7,11 @@
   </head>
   <body>
     <h1 class="shop-title">Shop Thời Trang ABC</h1>
+    <div style="text-align: right; padding: 10px">
+      <span id="user-greeting"></span>
+      <button onclick="logout()" class="btn-remove">Đăng xuất</button>
+    </div>
+
     <p class="cart-info">
       🛒 Giỏ hàng: <span id="cart-count">0</span> sản phẩm
     </p>
@@ -23,6 +28,8 @@
 
     <!-- Sản phẩm sẽ được JS tự vẽ vào đây -->
     <div class="product-list" id="product-list"></div>
+
+    <script src="common.js"></script>
 
     <script src="script.js"></script>
   </body>
