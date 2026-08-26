@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Giỏ hàng của tôi</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="common.js"></script>
+
+    <h1 class="shop-title">Giỏ hàng của tôi</h1>
+
+    <div class="cart-box">
+      <ul id="cart-items"></ul>
+      <p>
+        <strong>Tổng tiền: <span id="cart-total">0</span>đ</strong>
+      </p>
+      <button class="btn-cart" onclick="checkout()">Thanh toán</button>
+      <a href="index.html">← Tiếp tục mua sắm</a>
+    </div>
+
+    <script src="cart.js"></script>
+  </body>
+</html>
